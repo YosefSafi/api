@@ -1,0 +1,1 @@
+{"version":3,"file":"marketService.js","sourceRoot":"","sources":["marketService.ts"],"names":[],"mappings":";;;AAAO,MAAM,eAAe,GAAG,KAAK,IAAI,EAAE;IACxC,oDAAoD;IACpD,OAAO;QACL,MAAM,EAAE,iBAAiB;QACzB,KAAK,EAAE,IAAI;QACX,UAAU,EAAE,IAAI;QAChB,SAAS,EAAE,IAAI,IAAI,EAAE,CAAC,WAAW,EAAE;KACpC,CAAC;AACJ,CAAC,CAAC;AARW,QAAA,eAAe,mBAQ1B"}
