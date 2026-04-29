@@ -1,11 +1,13 @@
-export const fetchExternalData = async (source: string) => {
-  // Mock data aggregator
-  const mockData: Record<string, number> = {
-    'market_trend': 0.75,
-    'weather_score': 0.4,
-    'user_sentiment': 0.85,
-    'risk_factor': 0.2
-  };
+import axios from 'axios';
 
-  return mockData[source] || Math.random();
+const DATA_AGGREGATOR_URL = process.env.DATA_AGGREGATOR_URL || 'http://localhost:3003';
+
+export const fetchAggregatedData = async () => {
+  try {
+    const response = await axios.get(`${DATA_AGGREGATOR_URL}/aggregate`);
+    return response.data;
+  } catch (error) {
+    console.error('Data Aggregator Error:', error);
+    return { summary: 0.5, market: { trend: 0.5 }, weather: { score: 0.5 } };
+  }
 };

@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { getPrediction } from '../services/aiService';
-import { fetchExternalData } from '../services/dataService';
+import { fetchAggregatedData } from '../services/dataService';
 
 export const evaluate = async (req: Request, res: Response) => {
   const { factors, weights } = req.body;
@@ -10,10 +10,10 @@ export const evaluate = async (req: Request, res: Response) => {
     const aiResult = await getPrediction(factors || [0.5, 0.5, 0.5]);
 
     // 2. Fetch Aggregated Data
-    const marketTrend = await fetchExternalData('market_trend');
+    const aggregatedData = await fetchAggregatedData();
+    const marketTrend = aggregatedData.summary;
     
     // 3. Decision Logic (Weighted Score)
-    // score = w1*ai + w2*trend + ...
     const w_ai = weights?.ai || 0.6;
     const w_market = weights?.market || 0.4;
 
@@ -26,7 +26,8 @@ export const evaluate = async (req: Request, res: Response) => {
       score: finalScore,
       factors: {
         ai_prediction: aiResult.prediction,
-        market_trend: marketTrend
+        aggregated_trend: marketTrend,
+        details: aggregatedData
       },
       meta: {
         model: aiResult.model,
