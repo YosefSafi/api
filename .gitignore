@@ -4,3 +4,8 @@ node_modules/
 build/
 dist/
 *.log
+venv/
+__pycache__/
+.pytest_cache/
+*.joblib
+dev.db*
